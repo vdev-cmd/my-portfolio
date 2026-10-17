@@ -1,0 +1,79 @@
+/*
+ * Design tokens. Components use semantic names (bg-bg, text-muted, border-line …) so the
+ * light/dark themes only differ in the values below. data-theme is set on <html> by an inline
+ * script in index.html (before first paint) and by the useTheme composable.
+ */
+
+:root {
+  color-scheme: light;
+  --header-h: 4rem;
+
+  --bg: #ffffff;
+  --surface: #f8fafc;
+  --surface-raised: #ffffff;
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  /* Borders of interactive controls: >= 3:1 against the page and card backgrounds (WCAG 1.4.11). */
+  --control-border: #7b8aa0;
+  --fg: #0f172a;
+  --muted: #475569;
+  --primary: #2563eb;
+  /* Primary as TEXT (incl. on tinted chips): darker in light, lighter in dark, to reach 4.5:1. */
+  --primary-ink: #1d4ed8;
+  --primary-solid: #2563eb;
+  --primary-solid-hover: #1d4ed8;
+  --on-primary: #ffffff;
+  --accent: #0c6a85;
+  --accent-glow: #22d3ee;
+  --ring: #2563eb;
+  --shadow-color: 15 23 42;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #0b1120;
+  --surface: #111827;
+  --surface-raised: #162033;
+  --line: #1f2a3d;
+  --line-strong: #334155;
+  --control-border: #5b6b84;
+  --fg: #f8fafc;
+  --muted: #94a3b8;
+  --primary: #3b82f6;
+  --primary-ink: #60a5fa;
+  --primary-solid: #2563eb;
+  --primary-solid-hover: #1d4ed8;
+  --on-primary: #ffffff;
+  --accent: #22d3ee;
+  --accent-glow: #22d3ee;
+  --ring: #60a5fa;
+  --shadow-color: 0 0 0;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-raised: var(--surface-raised);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-control: var(--control-border);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-primary-ink: var(--primary-ink);
+  --color-primary-solid: var(--primary-solid);
+  --color-primary-solid-hover: var(--primary-solid-hover);
+  --color-on-primary: var(--on-primary);
+  --color-accent: var(--accent);
+  --color-glow: var(--accent-glow);
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'Noto Sans', sans-serif;
+  --font-mono:
+    ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --shadow-card:
+    0 1px 2px rgb(var(--shadow-color) / 0.05), 0 8px 24px -12px rgb(var(--shadow-color) / 0.18);
+}

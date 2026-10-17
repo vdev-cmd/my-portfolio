@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+@import './tokens.css';
+@import './base.css';
+
+/* Theme is driven by the data-theme attribute so `dark:` utilities follow the in-app toggle. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));

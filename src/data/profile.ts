@@ -20,7 +20,7 @@ export const profile: Profile = {
     accent: 'Exploring the Future of Applied AI.',
   },
   intro:
-    "I'm a Flutter Mobile Application Developer with 5+ years of experience building cross-platform Android and iOS applications, specializing in enterprise ERP and POS systems. I build scalable, maintainable, high-performance apps with Riverpod, MVVM and Clean Architecture, and I'm expanding into Applied AI Engineering to build intelligent, practical solutions for real business problems.",
+    "I'm a Flutter Mobile Application Developer with 5+ years of experience building cross-platform Android and iOS applications, across E-commerce, enterprise ERP and POS systems. I build scalable, maintainable, high-performance apps with Riverpod, GetX, MVVM and Clean Architecture, and I'm expanding into Applied AI Engineering to build intelligent, practical solutions for real business problems.",
   contactIntro:
     "Whether you're building enterprise mobile products, exploring how AI could fit into a business system, or just want to compare notes on Flutter architecture, I'd be glad to hear from you.",
 
@@ -30,6 +30,7 @@ export const profile: Profile = {
   github: 'https://github.com/vnotudev',
   // TODO: add your LinkedIn profile URL, e.g. 'https://www.linkedin.com/in/your-handle'.
   linkedin: undefined,
+  telegram: 'https://t.me/mengvsl',
   // TODO (optional): add a photo in public/images and describe it, e.g.
   // { src: 'images/profile.webp', alt: 'Portrait of Meng Visal', width: 640, height: 640 }
   photo: undefined,
@@ -42,7 +43,7 @@ export const profile: Profile = {
   focus: {
     professional: [
       'Flutter & Dart',
-      'ERP & POS apps',
+      'E-commerce, ERP & POS apps',
       'Riverpod · MVVM · Clean Architecture',
       'REST API integration',
       'Firebase · OneSignal',
@@ -53,14 +54,14 @@ export const profile: Profile = {
 
   about: {
     paragraphs: [
-      "I'm a Flutter mobile application developer based in Phnom Penh with 5+ years of experience building cross-platform Android and iOS applications. I specialize in enterprise ERP and POS systems, delivering Finance, Human Resource Management (HRM), Sales and CRM modules.",
-      'I focus on scalable, maintainable, high-performance applications with intuitive user experiences, built with Flutter, Dart, Riverpod, MVVM and Clean Architecture. Day to day that means RESTful API integration, Firebase Crashlytics for production stability, Firebase App Distribution for builds, OneSignal for push notifications, and Agile delivery with Git, GitLab, Bitbucket and Jira.',
+      "I'm a Flutter mobile application developer based in Phnom Penh with 5+ years of experience building cross-platform Android and iOS applications. I have built a B2C e-commerce app and enterprise ERP and POS systems, delivering Finance, Human Resource Management (HRM), Sales and CRM modules with their approval workflows.",
+      'I focus on scalable, maintainable, high-performance applications with intuitive user experiences, built with Flutter, Dart, Riverpod, GetX, MVVM and Clean Architecture. Day to day that means RESTful API integration with JWT and Firebase Authentication, Firebase Crashlytics for production stability, Firebase App Distribution for builds, OneSignal for push notifications, and Agile delivery with Git, GitLab, Bitbucket and Jira.',
       'I also use AI-powered development tools such as Claude Code and Gemini to improve productivity, raise code quality and work through complex technical problems. Building on that, I am now learning to build AI-powered systems themselves: Python, FastAPI, LLM APIs, RAG and agent tool calling, with the goal of integrating AI into enterprise software. I am early on that path, and the AI Journey section is explicit about what I am learning versus what I have shipped.',
     ],
     facts: [
       { label: 'Based in', value: 'Phnom Penh, Cambodia' },
       { label: 'Experience', value: '5+ years of professional Flutter development' },
-      { label: 'Focus', value: 'Enterprise ERP and POS mobile apps' },
+      { label: 'Focus', value: 'E-commerce, ERP and POS mobile apps' },
       { label: 'Modules', value: 'Finance, HRM, Sales and CRM' },
       { label: 'Direction', value: 'Applied AI / AI integration engineering' },
     ],

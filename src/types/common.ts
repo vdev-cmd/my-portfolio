@@ -18,6 +18,7 @@ export type IconName =
   | 'mail'
   | 'github'
   | 'linkedin'
+  | 'telegram'
 
 /**
  * Honest progress labels. Nothing is shown as `completed` unless the content file says so.

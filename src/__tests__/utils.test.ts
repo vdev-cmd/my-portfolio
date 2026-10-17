@@ -26,7 +26,13 @@ describe('assetUrl', () => {
 })
 
 describe('contact channels', () => {
-  const base: Profile = { ...profile, email: undefined, github: undefined, linkedin: undefined }
+  const base: Profile = {
+    ...profile,
+    email: undefined,
+    github: undefined,
+    linkedin: undefined,
+    telegram: undefined,
+  }
 
   it('returns nothing when no channel is configured', () => {
     expect(getContactChannels(base)).toEqual([])
@@ -55,6 +61,15 @@ describe('contact channels', () => {
       id: 'linkedin',
       href: 'https://www.linkedin.com/in/someone/',
       display: 'www.linkedin.com/in/someone',
+    })
+  })
+
+  it('builds Telegram from the profile URL', () => {
+    const [channel] = getContactChannels({ ...base, telegram: 'https://t.me/someone' })
+    expect(channel).toMatchObject({
+      id: 'telegram',
+      href: 'https://t.me/someone',
+      display: 't.me/someone',
     })
   })
 

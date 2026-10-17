@@ -148,6 +148,7 @@ describe('content integrity', () => {
     expect(profile.email).toBeUndefined()
     expect(profile.linkedin).toBeUndefined()
     expect(profile.github).toMatch(/^https:\/\/github\.com\/[\w-]+$/)
+    expect(profile.telegram).toBe('https://t.me/mengvsl')
     expect(profile.location).toBe('Phnom Penh, Cambodia')
   })
 

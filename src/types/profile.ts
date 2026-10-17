@@ -28,6 +28,7 @@ export interface Profile {
   /** Full profile URLs. Leave undefined to hide the link. */
   github?: string
   linkedin?: string
+  telegram?: string
   photo?: ProfileImage
   resume: {
     /** File name inside `public/`. The button is only shown when the file exists at build time. */
@@ -47,7 +48,7 @@ export interface Profile {
   }
 }
 
-export type ChannelId = 'email' | 'github' | 'linkedin'
+export type ChannelId = 'email' | 'github' | 'linkedin' | 'telegram'
 
 export interface ContactChannel {
   id: ChannelId

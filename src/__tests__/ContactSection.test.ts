@@ -39,13 +39,14 @@ describe('ContactSection (email configured)', () => {
     expect(mail.attributes('target')).toBeUndefined()
   })
 
-  it('links LinkedIn and GitHub safely in a new tab', () => {
+  it('links GitHub, LinkedIn and Telegram safely in a new tab', () => {
     const wrapper = mount(ContactSection)
     const external = wrapper.findAll('a[target="_blank"]')
 
     expect(external.map((a) => a.attributes('href'))).toEqual([
       'https://github.com/vnotudev',
       'https://www.linkedin.com/in/example',
+      'https://t.me/mengvsl',
     ])
     for (const link of external) expect(link.attributes('rel')).toBe('noopener noreferrer')
   })

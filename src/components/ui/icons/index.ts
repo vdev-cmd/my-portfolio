@@ -20,6 +20,7 @@ import type { Component } from 'vue'
 import type { IconName } from '../../../types/common'
 import GithubIcon from './GithubIcon.vue'
 import LinkedinIcon from './LinkedinIcon.vue'
+import TelegramIcon from './TelegramIcon.vue'
 
 /** Single registry of data-driven icons; only these are bundled. */
 export const icons: Record<IconName, Component> = {
@@ -41,4 +42,5 @@ export const icons: Record<IconName, Component> = {
   mail: Mail,
   github: GithubIcon,
   linkedin: LinkedinIcon,
+  telegram: TelegramIcon,
 }

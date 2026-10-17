@@ -111,7 +111,6 @@
     opacity: 0;
     transform: translateY(-6px);
   }
-
   to {
     opacity: 1;
     transform: none;
@@ -123,7 +122,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {

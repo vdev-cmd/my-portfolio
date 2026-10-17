@@ -38,6 +38,15 @@ export function getContactChannels(profile: Profile): ContactChannel[] {
       icon: 'linkedin',
     })
   }
+  if (profile.telegram) {
+    channels.push({
+      id: 'telegram',
+      label: 'Telegram',
+      href: profile.telegram,
+      display: stripProtocol(profile.telegram),
+      icon: 'telegram',
+    })
+  }
 
   return channels
 }

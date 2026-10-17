@@ -4,7 +4,7 @@ import type { SiteConfig } from '../types/site.ts'
 export const site: SiteConfig = {
   title: 'Meng Visal — Flutter Engineer exploring Applied AI',
   description:
-    'Portfolio of Meng Visal, a Flutter developer in Phnom Penh with 5+ years building enterprise ERP and POS mobile apps, now expanding into Applied AI engineering.',
+    'Portfolio of Meng Visal, a Flutter developer in Phnom Penh with 5+ years building e-commerce, ERP and POS mobile apps, now expanding into Applied AI engineering.',
   locale: 'en_US',
   themeColors: { light: '#ffffff', dark: '#0b1120' },
   ogImage: {
@@ -18,7 +18,7 @@ export const site: SiteConfig = {
     'Flutter',
     'Dart',
     'Mobile application development',
-    'ERP and POS mobile applications',
+    'E-commerce, ERP and POS mobile applications',
     'Riverpod',
     'REST API integration',
     'Clean Architecture',

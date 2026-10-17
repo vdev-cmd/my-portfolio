@@ -24,7 +24,14 @@ export const skillCategories: SkillCategory[] = [
     id: 'architecture',
     title: 'Architecture',
     icon: 'layers',
-    skills: ['OOP', 'MVC', 'MVVM', 'Clean Architecture', 'Repository Pattern', 'Dependency Injection'],
+    skills: [
+      'OOP',
+      'MVC',
+      'MVVM',
+      'Clean Architecture',
+      'Repository Pattern',
+      'Dependency Injection',
+    ],
   },
   {
     id: 'state',

@@ -15,6 +15,7 @@ export const experience: ExperienceItem[] = [
     company: 'Enterprise software company',
     role: 'Flutter Mobile Application Developer',
     period: 'Current role',
+    current: true,
     summary:
       'Developing and maintaining an enterprise ERP mobile application for Android and iOS that supports Finance, Human Resources, Sales, CRM and other business operations.',
     responsibilities: [

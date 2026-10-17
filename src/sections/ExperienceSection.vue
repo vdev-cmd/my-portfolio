@@ -13,7 +13,7 @@ import { vReveal } from '@/directives/reveal'
     description="Enterprise Flutter development, from business workflows to the APIs behind them."
   >
     <!-- The vertical rule sits on the list's left edge; each marker is centred on it. -->
-    <ol class="relative ml-2 border-l border-line-strong md:ml-3">
+    <ol class="relative ml-2 space-y-8 border-l border-line-strong md:ml-3 md:space-y-10">
       <ExperienceCard v-for="item in experience" :key="item.id" v-reveal :item="item" />
     </ol>
   </AppSection>

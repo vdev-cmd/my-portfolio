@@ -6,6 +6,8 @@ export interface ExperienceItem {
   /** Free text so partial dates are possible, e.g. `2022 – Present`. */
   period: string
   location?: string
+  /** Highlights the entry as the current role on the timeline. */
+  current?: boolean
   summary: string
   responsibilities: string[]
   technologies: string[]

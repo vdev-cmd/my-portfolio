@@ -207,4 +207,63 @@ describe('ExperienceCard', () => {
     expect(linked.get('a').attributes('href')).toBe('https://acme.test')
     expect(linked.get('a').attributes('rel')).toBe('noopener noreferrer')
   })
+
+  const lines = (n: number) => Array.from({ length: n }, (_, i) => `Line ${i + 1}`)
+  const visibleItems = (wrapper: ReturnType<typeof mount>) =>
+    wrapper
+      .findAll('ul[id$="-responsibilities"] > li')
+      .filter((li) => (li.element as HTMLElement).style.display !== 'none')
+
+  it('collapses long lists behind an accessible toggle, keeping every line in the DOM', async () => {
+    const wrapper = mount(ExperienceCard, {
+      props: { item: { ...base, responsibilities: lines(9) } },
+    })
+    const toggle = wrapper.get('button')
+
+    expect(wrapper.findAll('ul[id$="-responsibilities"] > li')).toHaveLength(9)
+    expect(visibleItems(wrapper)).toHaveLength(5)
+    expect(toggle.text()).toContain('Show 4 more')
+    expect(toggle.attributes('aria-expanded')).toBe('false')
+    expect(wrapper.find(`#${toggle.attributes('aria-controls')}`).exists()).toBe(true)
+
+    await toggle.trigger('click')
+    expect(visibleItems(wrapper)).toHaveLength(9)
+    expect(toggle.text()).toContain('Show less')
+    expect(toggle.attributes('aria-expanded')).toBe('true')
+
+    await toggle.trigger('click')
+    expect(visibleItems(wrapper)).toHaveLength(5)
+  })
+
+  it('never hides a single line behind a toggle', () => {
+    const wrapper = mount(ExperienceCard, {
+      props: { item: { ...base, responsibilities: lines(6) } },
+    })
+    expect(wrapper.find('button').exists()).toBe(false)
+    expect(visibleItems(wrapper)).toHaveLength(6)
+  })
+
+  it('emphasises the label of "Label: detail" lines', () => {
+    const wrapper = mount(ExperienceCard, {
+      props: {
+        item: { ...base, responsibilities: ['Built Finance features: advances and receipts'] },
+      },
+    })
+    expect(wrapper.get('ul[id$="-responsibilities"] strong').text()).toBe('Built Finance features:')
+    expect(wrapper.get('ul[id$="-responsibilities"] li').text()).toContain('advances and receipts')
+  })
+
+  it('highlights the current role', () => {
+    const current = mount(ExperienceCard, { props: { item: { ...base, current: true } } })
+    const previous = mount(ExperienceCard, { props: { item: base } })
+    expect(current.html()).toContain('bg-primary')
+    expect(previous.html()).not.toContain('border-primary bg-primary')
+  })
+
+  it('lists the tech stack in a labelled side panel', () => {
+    const wrapper = mount(ExperienceCard, { props: { item: base } })
+    const aside = wrapper.get('aside')
+    expect(wrapper.get(`#${aside.attributes('aria-labelledby')}`).text()).toBe('Tech stack')
+    expect(aside.findAll('li').map((li) => li.text())).toEqual(['Dart'])
+  })
 })

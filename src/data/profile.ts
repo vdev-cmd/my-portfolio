@@ -31,9 +31,12 @@ export const profile: Profile = {
   // TODO: add your LinkedIn profile URL, e.g. 'https://www.linkedin.com/in/your-handle'.
   linkedin: undefined,
   telegram: 'https://t.me/mengvsl',
-  // TODO (optional): add a photo in public/images and describe it, e.g.
-  // { src: 'images/profile.webp', alt: 'Portrait of Meng Visal', width: 640, height: 640 }
-  photo: undefined,
+  photo: {
+    src: 'images/profile.webp',
+    alt: 'Portrait of Meng Visal wearing round glasses',
+    width: 256,
+    height: 256,
+  },
 
   resume: {
     path: 'resume.pdf',

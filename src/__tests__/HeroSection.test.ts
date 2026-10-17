@@ -73,9 +73,23 @@ describe('HeroSection', () => {
     for (const item of profile.focus.learning) expect(learning!.text()).toContain(item)
   })
 
+  it('shows the profile photo with alt text and reserved dimensions', () => {
+    const img = mount(HeroSection).get('aside img')
+    expect(img.attributes('src')).toBe(`${import.meta.env.BASE_URL}${profile.photo!.src}`)
+    expect(img.attributes('alt')).toBe(profile.photo!.alt)
+    expect(img.attributes('width')).toBe(String(profile.photo!.width))
+    expect(img.attributes('height')).toBe(String(profile.photo!.height))
+  })
+
   it('shows initials when no photo is configured', () => {
-    const wrapper = mount(HeroSection)
-    expect(wrapper.find('aside img').exists()).toBe(false)
-    expect(wrapper.get('aside').text()).toContain(profile.initials)
+    const photo = profile.photo
+    profile.photo = undefined
+    try {
+      const wrapper = mount(HeroSection)
+      expect(wrapper.find('aside img').exists()).toBe(false)
+      expect(wrapper.get('aside').text()).toContain(profile.initials)
+    } finally {
+      profile.photo = photo
+    }
   })
 })

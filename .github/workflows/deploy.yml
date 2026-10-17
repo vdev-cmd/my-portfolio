@@ -17,6 +17,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # configure-pages reads the Pages site settings (to get the site URL), which needs pages: read.
+    permissions:
+      contents: read
+      pages: read
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

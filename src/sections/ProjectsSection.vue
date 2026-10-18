@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
+import { ScrollTrigger } from '@/animations/gsap'
 import ProjectCard from '@/components/common/ProjectCard.vue'
 import ProjectFilter, { type FilterOption } from '@/components/common/ProjectFilter.vue'
 import AppSection from '@/components/layout/AppSection.vue'
 import { FILTER_MIN_PROJECTS, projectCategories, projects } from '@/data/projects'
-import { vReveal } from '@/directives/reveal'
 
 const ALL = 'all'
 const selected = ref<string>(ALL)
@@ -31,6 +31,9 @@ const visibleProjects = computed(() =>
     : projects.filter((project) => project.category === selected.value),
 )
 
+// Cards that stay put still move on the page when others disappear: re-measure scroll triggers.
+watch(selected, () => nextTick(() => ScrollTrigger.refresh()))
+
 // Pair each project with its category; a project with an unknown category is skipped.
 const cards = computed(() =>
   visibleProjects.value.flatMap((project) => {
@@ -54,10 +57,28 @@ const cards = computed(() =>
       </p>
     </div>
 
-    <ul class="grid gap-6 md:grid-cols-2">
-      <li v-for="(card, index) in cards" :key="card.project.id" v-reveal="(index % 2) * 80">
+    <!-- Cards that appear after a filter change glide in; removed ones leave at once. -->
+    <TransitionGroup tag="ul" name="project" class="grid gap-6 md:grid-cols-2">
+      <li v-for="card in cards" :key="card.project.id">
         <ProjectCard :project="card.project" :category="card.category" />
       </li>
-    </ul>
+    </TransitionGroup>
   </AppSection>
 </template>
+
+<style scoped>
+.project-enter-active {
+  transition:
+    opacity 0.5s ease,
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-enter-from {
+  opacity: 0;
+  transform: translateY(24px) scale(0.96);
+}
+
+.project-move {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+</style>

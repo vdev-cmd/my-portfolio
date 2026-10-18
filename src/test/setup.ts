@@ -1,6 +1,9 @@
 import { afterEach, beforeEach } from 'vitest'
 import { installMatchMedia } from './matchMedia'
 
+// GSAP's ScrollTrigger reads matchMedia while its module is imported, before any hook runs.
+installMatchMedia()
+
 beforeEach(() => {
   // jsdom implements neither matchMedia nor scrollTo.
   installMatchMedia()

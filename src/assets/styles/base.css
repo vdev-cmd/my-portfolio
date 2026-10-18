@@ -90,6 +90,85 @@
   }
 }
 
+/* ---------- Shared interactive surfaces (see composables/useTilt.ts) ---------- */
+
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes border-spin {
+  to {
+    --border-angle: 360deg;
+  }
+}
+
+/* Pointer tilt driven by --rx / --ry; a soft glare follows the pointer (--gx, --gy, --glare). */
+.tilt-surface {
+  position: relative;
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition:
+    scale 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    box-shadow 0.4s ease;
+}
+
+.tilt-surface:hover {
+  scale: 1.015;
+  box-shadow:
+    var(--shadow-card),
+    0 24px 48px -28px color-mix(in oklab, var(--primary) 55%, transparent);
+}
+
+.tilt-surface::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: var(--glare, 0);
+  background: radial-gradient(
+    24rem circle at var(--gx, 50%) var(--gy, 50%),
+    color-mix(in oklab, var(--accent-glow) 12%, transparent),
+    transparent 60%
+  );
+}
+
+/* Gradient ring that travels around the card on hover, keyboard focus or when .is-active. */
+.glow-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: conic-gradient(
+    from var(--border-angle),
+    transparent 0 55%,
+    var(--primary) 75%,
+    var(--accent-glow) 88%,
+    transparent 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.glow-border:hover::before,
+.glow-border:focus-within::before,
+.glow-border.is-active::before {
+  opacity: 1;
+  animation: border-spin 4s linear infinite;
+}
+
 /* Scroll reveal (see directives/reveal.ts) */
 [data-reveal] {
   opacity: 0;

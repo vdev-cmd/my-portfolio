@@ -37,7 +37,8 @@ const responsibilities = computed(() => props.item.responsibilities.map(splitLab
     />
     <!-- Timeline marker, centred on the list's left rule -->
     <span
-      class="absolute top-7 left-0 grid size-4 -translate-x-1/2 place-items-center rounded-full border-2 ring-4 ring-bg"
+      data-xp-marker
+      class="absolute top-7 left-0 z-10 grid size-4 -translate-x-1/2 place-items-center rounded-full border-2 ring-4 ring-bg"
       :class="
         item.current
           ? 'border-primary bg-primary shadow-[0_0_0_6px_color-mix(in_oklab,var(--primary)_20%,transparent)]'

@@ -26,8 +26,7 @@ export const profile: Profile = {
 
   // TODO: add an email address you are happy to publish, e.g. 'name@example.com'.
   email: undefined,
-  // Inferred from this repository's remote (vnotudev/my-portfolio) — change it if that is not your profile.
-  github: 'https://github.com/vnotudev',
+  github: 'https://github.com/vdev-cmd',
   // TODO: add your LinkedIn profile URL, e.g. 'https://www.linkedin.com/in/your-handle'.
   linkedin: undefined,
   telegram: 'https://t.me/mengvsl',

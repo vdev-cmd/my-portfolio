@@ -29,18 +29,34 @@ const responsibilities = computed(() => props.item.responsibilities.map(splitLab
 
 <template>
   <li class="relative pl-9 md:pl-14">
-    <!-- Timeline marker, centred on the list's left rule -->
+    <!-- Connector from the rail to the card -->
     <span
-      class="absolute top-7 left-0 grid size-4 -translate-x-1/2 place-items-center rounded-full border-2"
-      :class="
-        item.current
-          ? 'border-primary bg-primary shadow-[0_0_0_5px_color-mix(in_oklab,var(--primary)_18%,transparent)]'
-          : 'border-line-strong bg-bg'
-      "
+      class="absolute top-9 left-0 h-px w-9 md:w-14"
+      :class="item.current ? 'bg-primary/60' : 'bg-line-strong'"
       aria-hidden="true"
     />
+    <!-- Timeline marker, centred on the list's left rule -->
+    <span
+      class="absolute top-7 left-0 grid size-4 -translate-x-1/2 place-items-center rounded-full border-2 ring-4 ring-bg"
+      :class="
+        item.current
+          ? 'border-primary bg-primary shadow-[0_0_0_6px_color-mix(in_oklab,var(--primary)_20%,transparent)]'
+          : 'border-line-strong bg-surface'
+      "
+      aria-hidden="true"
+    >
+      <span
+        v-if="item.current"
+        class="absolute size-full rounded-full bg-primary/60 motion-safe:animate-ping"
+      />
+      <span v-else class="size-1 rounded-full bg-line-strong" />
+    </span>
 
-    <article class="card overflow-hidden" :aria-labelledby="`${item.id}-role`">
+    <article
+      class="card card-interactive overflow-hidden"
+      :class="item.current ? 'border-primary/40' : ''"
+      :aria-labelledby="`${item.id}-role`"
+    >
       <header
         class="flex flex-col gap-3 border-b border-line px-6 py-5 sm:flex-row sm:items-start sm:justify-between md:px-8"
       >

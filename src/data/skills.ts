@@ -37,7 +37,7 @@ export const skillCategories: SkillCategory[] = [
     id: 'state',
     title: 'State Management',
     icon: 'workflow',
-    skills: ['Riverpod', 'GetX'],
+    skills: ['Flutter Bloc', 'Cubit', 'Riverpod', 'GetX'],
   },
   {
     id: 'backend',

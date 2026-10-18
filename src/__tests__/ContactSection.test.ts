@@ -44,7 +44,7 @@ describe('ContactSection (email configured)', () => {
     const external = wrapper.findAll('a[target="_blank"]')
 
     expect(external.map((a) => a.attributes('href'))).toEqual([
-      'https://github.com/vnotudev',
+      'https://github.com/vdev-cmd',
       'https://www.linkedin.com/in/example',
       'https://t.me/mengvsl',
     ])

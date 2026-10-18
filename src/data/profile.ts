@@ -32,7 +32,7 @@ export const profile: Profile = {
   telegram: 'https://t.me/mengvsl',
   photo: {
     src: 'images/profile.webp',
-    alt: 'Portrait of Meng Visal wearing round glasses',
+    alt: 'Portrait of Meng Visal in round glasses and a beige jacket',
     width: 256,
     height: 256,
   },

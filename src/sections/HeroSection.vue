@@ -175,7 +175,6 @@ useGsap(section, ({ desktop }, el) => {
 
             <div class="tilt-layer flex items-center gap-5" style="--z: 32px">
               <div class="portrait shrink-0">
-                <span class="portrait-ring" aria-hidden="true" />
                 <img
                   v-if="profile.photo"
                   :src="assetUrl(profile.photo.src)"
@@ -323,70 +322,17 @@ useGsap(section, ({ desktop }, el) => {
 }
 
 .portrait {
-  position: relative;
-  display: grid;
-  place-items: center;
   width: 7rem;
   height: 7rem;
-  transform-style: preserve-3d;
-  animation: portrait-float 6s ease-in-out infinite;
 }
 
-/* Rotating gradient halo behind the photo */
-.portrait-ring {
-  position: absolute;
-  inset: -5px;
-  border-radius: 1.75rem;
-  background: conic-gradient(
-    from var(--ring-angle, 0deg),
-    var(--primary),
-    var(--accent-glow),
-    transparent 40%,
-    var(--primary)
-  );
-  filter: blur(0.5px);
-  animation: portrait-spin 8s linear infinite;
-}
-
-.portrait-ring::after {
-  content: '';
-  position: absolute;
-  inset: -10px;
-  border-radius: inherit;
-  background: inherit;
-  filter: blur(18px);
-  opacity: 0.45;
-}
-
+/* A still, framed headshot: no float, halo or depth effects on the photo itself. */
 .portrait-img {
-  position: relative;
   width: 100%;
   height: 100%;
   border-radius: 1.5rem;
   border: 3px solid var(--surface);
-  transform: translateZ(24px);
-  box-shadow: 0 18px 40px -16px rgb(var(--shadow-color) / 0.55);
-}
-
-@property --ring-angle {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
-}
-
-@keyframes portrait-spin {
-  to {
-    --ring-angle: 360deg;
-  }
-}
-
-@keyframes portrait-float {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-  50% {
-    translate: 0 -6px;
-  }
+  outline: 1px solid var(--line-strong);
+  box-shadow: 0 12px 28px -14px rgb(var(--shadow-color) / 0.45);
 }
 </style>

@@ -81,6 +81,12 @@ describe('HeroSection', () => {
     expect(img.attributes('height')).toBe(String(profile.photo!.height))
   })
 
+  it('keeps the profile photo still, without the spinning halo', () => {
+    const wrapper = mount(HeroSection)
+    expect(wrapper.find('.portrait-ring').exists()).toBe(false)
+    expect(wrapper.get('aside img').classes()).toContain('portrait-img')
+  })
+
   it('shows initials when no photo is configured', () => {
     const photo = profile.photo
     profile.photo = undefined

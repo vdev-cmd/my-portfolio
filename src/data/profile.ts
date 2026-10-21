@@ -33,8 +33,8 @@ export const profile: Profile = {
   photo: {
     src: 'images/profile.webp',
     alt: 'Portrait of Meng Visal in round glasses and a beige jacket',
-    width: 256,
-    height: 256,
+    width: 512,
+    height: 512,
   },
 
   resume: {

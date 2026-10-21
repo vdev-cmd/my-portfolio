@@ -2,10 +2,11 @@
 
 A static, single-page portfolio for a Flutter engineer moving into Applied AI engineering.
 Built with **Vue 3 (Composition API, `<script setup>`) · TypeScript (strict) · Vite · Tailwind CSS v4**,
-deployed to **GitHub Pages** with GitHub Actions. No backend, no router, no runtime dependencies beyond Vue and an icon set.
+deployed to **GitHub Pages** with GitHub Actions. No backend, no router, no runtime dependencies beyond Vue, GSAP and an icon set.
 
 - Light and dark themes (system preference followed, choice persisted)
 - Anchor navigation with scroll-spy, accessible mobile menu, skip link, reduced-motion support
+- Cinematic motion with GSAP + ScrollTrigger: hero intro, depth parallax, scroll-driven section transitions
 - All content lives in `src/data/*.ts`, separate from components
 - Honest by design: unconfirmed content is flagged, nothing is shown that has not been configured
 
@@ -39,12 +40,13 @@ npm run dev        # start the dev server (http://localhost:5173)
 ├── scripts/social/                HTML sources for the generated social image and touch icon
 ├── vite/                          Build-time site plugin (SEO tags, robots, sitemap, 404) + tests
 ├── src/
+│   ├── animations/                gsap.ts: plugin registration, shared eases/durations, media conditions
 │   ├── assets/styles/             tokens.css (design tokens), base.css, main.css (Tailwind entry)
 │   ├── components/
-│   │   ├── layout/                AppHeader, AppFooter, AppSection
-│   │   ├── common/                ProjectCard, ProjectFilter, ExperienceCard, SkillGroupCard, ...
+│   │   ├── layout/                AppHeader, AppFooter, AppSection, AmbientBackdrop
+│   │   ├── common/                ProjectCard, ExperienceCard, SkillGroupCard, FloatingGlyphs, ...
 │   │   └── ui/                    BaseButton, TagChip, StatusBadge, AppIcon, brand icons
-│   ├── composables/               useTheme, useScrollSpy, useClipboard, useMediaQuery
+│   ├── composables/               useGsap, useTilt, useTheme, useScrollSpy, useClipboard, useMediaQuery
 │   ├── data/                      profile, experience, skills, projects, journey, navigation, site
 │   ├── directives/                v-reveal (scroll fade-in)
 │   ├── sections/                  Hero, About, Experience, Skills, Projects, AiJourney, Contact
@@ -89,7 +91,7 @@ The site never invents facts, so these are placeholders or switched off until yo
 | ------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
 | **Email**                 | Not published; mailto link and "Copy email" button are hidden        | Set `email` in `profile.ts`                                                                                               |
 | **LinkedIn**              | Not published; link hidden                                           | Set `linkedin` in `profile.ts`                                                                                            |
-| **GitHub**                | `https://github.com/vdev-cmd`                                          | Confirm or change `github` in `profile.ts`                                                                                |
+| **GitHub**                | `https://github.com/vdev-cmd`                                        | Confirm or change `github` in `profile.ts`                                                                                |
 | **Resume**                | "Download Resume" button hidden                                      | Put your PDF at `public/resume.pdf`, then restart/rebuild (the button appears automatically)                              |
 | **Photo**                 | Initials monogram shown                                              | Add `public/images/profile.webp` and set `photo` in `profile.ts`                                                          |
 | **Employment**            | `[Company name]`, `[Start date] – Present`, flagged "Sample content" | Edit `experience.ts`, verify each line, delete `placeholder: true`                                                        |
@@ -109,6 +111,22 @@ Colours, spacing-independent tokens and the font stacks are defined once in `src
 
 A test (`src/__tests__/contrast.test.ts`) reads `tokens.css` and fails if text drops below 4.5:1 or control/focus
 colours below 3:1 in either theme, so palette tweaks are checked automatically.
+
+### Motion
+
+Animations use GSAP (ScrollTrigger and SplitText are part of the `gsap` package). Each component runs its
+own animation through `useGsap(rootRef, setup)` (`src/composables/useGsap.ts`), which:
+
+- only calls `setup` when the visitor has not asked for reduced motion, so content is static and fully
+  visible for them;
+- passes `{ desktop, finePointer }` so scrubbed parallax and 3D depth run on wide screens only, and phones get
+  short one-time reveals;
+- scopes selectors to the component and reverts every tween, ScrollTrigger and SplitText on unmount.
+
+Only `transform` and `opacity` are animated, and start states are applied before the first paint, so there is
+no layout shift. `useScrollTriggerRefresh` (in `App.vue`) re-measures scroll positions when the page height
+changes. Shared eases and durations live in `src/animations/gsap.ts`; the hover glow and pointer tilt styles
+(`.glow-border`, `.tilt-surface`) live in `base.css`.
 
 ### Regenerating the social image and touch icon
 
